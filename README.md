@@ -1,1 +1,1 @@
-# holbertonschool-simple_shell
+Simple shell project by Krisha and Luke
