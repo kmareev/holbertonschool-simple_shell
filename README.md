@@ -1,4 +1,4 @@
-![Project banner](https://github.com/krishmaree/holbertonschool-simple_shell/assets/158859905/f6d9d76d-e75f-468f-8f93-bd4257f018ef)
+Insert project image
 
 # C - Simple Shell Project
 
