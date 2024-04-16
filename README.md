@@ -1,4 +1,5 @@
-![Image of project banner]
+Insert project image
+
 # C - Simple Shell Project
 
 ## Project Overview
