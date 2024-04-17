@@ -36,5 +36,5 @@ int execute_command(char *command)
         int status;
         waitpid(pid, &status, 0);
     }
-    return 1;
+    return (1);
 }
