@@ -1,53 +1,44 @@
 #include "simple_shell.h"
 
 /**
- * execute_command - Executes a shell command
- * @command:The command to be executed
+ * execute_command - Executes a command with its arguments
+ * @args: an array of arguments (command and its parameters)
  * Return: 1 if successful, otherwise -1
  */
-int execute_command(char *command)
-{
-	char **environ = 0;
-	pid_t pid;
 
-	if (command == NULL)
-	{
-		printf("\n");
-		exit(EXIT_SUCCESS);
-	}
-	if (command[strlen(command) - 1] == '\n')
-	{
-		command[strlen(command) - 1] = '\0';
-	}
+int execute_command(char *args)
+{
+	pid_t pid, wpid;
+	int status;
+
 	pid = fork();
-	if (pid == -1)
+	if (pid == 1)
 	{
 		perror("fork");
-		exit(EXIT_FAILURE);
+		return (-1);
 	}
 	else if (pid == 0)
 	{
-		char **argv = malloc(2 * sizeof(char *));
-
-		if (argv == NULL)
+		if (execvp(args[0], args) == -1)
 		{
-			perror("malloc");
+			perror("execvp");
 			exit(EXIT_FAILURE);
 		}
-		argv[0] = command;
-		argv[1] = NULL;
-		if (execve(command, argv, environ) == -1)
-		{
-			perror("execve");
-			exit(EXIT_FAILURE);
-		}
-		free(argv);
 	}
 	else
 	{
-		int status;
+		do {
+			wpid = waitpid(pid, &status, WUNTRACED);
+			if (wpid == -1)
+			{
+				perror("waitpid");
+				return (-1);
+			}
+		}
 
-		waitpid(pid, &status, 0);
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+			;
 	}
+
 	return (1);
 }

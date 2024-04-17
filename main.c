@@ -1,27 +1,25 @@
 #include "simple_shell.h"
 
 /**
- * main - Entry point of the shell
- * @argc: The number of command-line arguments
- * @argv: An array containing the command-line arguments
+ * main - Entry point of the simple shell
  *
- * Return: 0 on success, 1 on failure
+ * Return: Always returns 0
  */
-int main(int argc, char *argv[])
+int main(void)
 {
-	if (argc == 1)
+    char *line;
+    char **args;
+    int status;
 
-	{
-		interactive_mode();
-	}
-	else if (argc == 2)
-	{
-		non_interactive_mode(argv[1]);
-	}
-	else
-	{
-		fprintf(stderr, "Usage: %s [command]\n", argv[0]);
-		exit(EXIT_FAILURE);
-	}
-	return (0);
+    do {
+        printf("$ ");
+        line = read_line();
+        args = parse_line(line);
+        status = execute_command(args);
+
+        free(line);
+        free(args);
+    } while (status);
+
+    return (EXIT_SUCCESS);
 }
