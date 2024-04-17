@@ -7,10 +7,10 @@
 #include <string.h>
 #include <sys/wait.h>
 
-void display_prompt();
-char *read_command();
+void display_prompt(void);
+char *read_command(void);
 int execute_command(char *command);
-void interactive_mode();
+void interactive_mode(void);
 void non_interactive_mode(char *command);
 
 #endif

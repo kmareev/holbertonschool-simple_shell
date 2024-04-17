@@ -7,5 +7,5 @@
  */
 void non_interactive_mode(char *command)
 {
-    execute_command(command);
+	execute_command(command);
 }
