@@ -1,6 +1,4 @@
 #include "simple_shell.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 /**
  * execute_command - Executes a shell command
@@ -9,7 +7,7 @@
  */
 int execute_command(char *command)
 {
-	extern char **environ;
+	char **environ = 0;
 	pid_t pid;
 
 	if (command == NULL)
@@ -30,6 +28,7 @@ int execute_command(char *command)
 	else if (pid == 0)
 	{
 		char **argv = malloc(2 * sizeof(char *));
+
 		if (argv == NULL)
 		{
 			perror("malloc");
@@ -47,6 +46,7 @@ int execute_command(char *command)
 	else
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 	}
 	return (1);
