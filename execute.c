@@ -1,9 +1,6 @@
 #include "simple_shell.h"
 #include <stdlib.h>
-#include <unistd.h> 
-
-/* External declaration for environ */
-extern char **environ;
+#include <unistd.h>
 
 /**
  * execute_command - Executes a shell command
@@ -12,6 +9,7 @@ extern char **environ;
  */
 int execute_command(char *command)
 {
+	extern char **environ;
 	pid_t pid;
 
 	if (command == NULL)
