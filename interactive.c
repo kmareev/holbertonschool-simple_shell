@@ -2,6 +2,7 @@
 
 /**
  * interactive_mode - Runs the shell in interactive mode
+ *
  */
 void interactive_mode(void)
 {
