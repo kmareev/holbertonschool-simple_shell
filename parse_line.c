@@ -3,28 +3,34 @@
 /**
  * parse_line - Parses a line of input into tokens
  * @line: The line of input to be parsed
+ * @delimiter: use to tokenize the string
  *
- * Return: An array of tokens (words)
+ * Return: An array of token, with the last element as NULL
  */
-char **parse_line(char *line)
+char **parse_line(char *line, char *delimiter)
 {
-	char **tokens = malloc(BUFFER_SIZE * sizeof(char *));
+	int token_count = 0;
 	char *token;
-	int position = 0;
+	char **tokens = malloc(strlen(line) * sizeof(char *));
 
 	if (!tokens)
-	{
-		fprintf(stderr, "Allocation error\n");
-		exit(EXIT_FAILURE);
-	}
-	token = strtok(line, " \n");
-	while (token != NULL)
-	{
-		tokens[position] = token;
-		position++;
+		return (NULL);
+	token = strtok(line, delimiter);
 
-		token = strtok(NULL, " \n");
+	while (token)
+	{
+		tokens[token_count] = strdup(token);
+		if (!tokens[token_count])
+		{
+			free(token);
+			free(tokens[token_count]);
+			fprintf(stderr, "Token duplication failed.");
+			exit(EXIT_FAILURE);
+		}
+		token_count++;
+		token = strtok(NULL, delimiter);
 	}
-	tokens[position] = NULL;
+	free(token);
+	tokens[token_count] = NULL;
 	return (tokens);
 }
