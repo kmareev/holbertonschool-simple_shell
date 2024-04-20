@@ -16,5 +16,6 @@ char **parse_line(char *line, char *delimiter);
 int execute_command(char **args);
 int print_env(void);
 char *find_executable(char **args);
+void display_prompt(void);
 
 #endif

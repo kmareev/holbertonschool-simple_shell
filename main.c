@@ -13,6 +13,8 @@ int main(void)
 
 	while (1)
 	{
+		display_prompt();
+
 		line = read_line();
 		if (!line)
 			break;
