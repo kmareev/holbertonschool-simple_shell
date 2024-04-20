@@ -12,7 +12,7 @@ int execute_command(char *args)
 	int status;
 
 	pid = fork();
-	if (pid == 1)
+	if (pid == -1)
 	{
 		perror("fork");
 		return (-1);
