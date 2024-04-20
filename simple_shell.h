@@ -14,7 +14,7 @@ extern char **environ;
 char *read_line(void);
 char **parse_line(char *line);
 int execute_command(char **args);
-void print_env(void);
+int print_env(void);
 char *find_executable(char **args);
 
 #endif
