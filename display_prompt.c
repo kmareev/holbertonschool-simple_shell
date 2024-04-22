@@ -3,7 +3,6 @@
 /**
  * display_prompt - Prints prompt
  */
-
 void display_prompt(void)
 {
 	printf("$ ");
