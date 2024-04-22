@@ -35,6 +35,5 @@ int main(void)
 			print_env();
 			continue;
 		}
-		else if (strcmp(args[0], "exit") == 0 && args[1] == NULL)
 	}
-}	
+}
