@@ -37,43 +37,7 @@ int execute_command(char **args)
 			{
 				pid = fork();
 				flag = 1;
-				break;
-			}
-			free(path_full);
-			i++;
-		}
-		for (i = 0; path_arr[i]; i++)
-			free(path_arr[i]);
-		free(env_path);
-		free(path_arr);
-	}
-	if (!flag)
-	{
-		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-		return(127);
-	}
-	else
-	{
-		if (pid == -1)
-		{
-			free(path_full);
-			perror("fork");
-		}
-		else if (pid == 0)
-		{
-			if (execve(path_full, args, environ) == -1)
-			{
-				free(path_full);
-				return (2);
 			}
 		}
-		else
-		{
-			waitpid(pid, &status, 0);
-			free(path_full);
-			if (WIFEXITED(status))
-			       return WEXITSTATUS(status);
-		}
 	}
-       return (0);
 }
