@@ -1,11 +1,13 @@
 #include "simple_shell.h"
 
-/*
- * print_env - Prints the environment
- * @void: void
- * Return: 0 on success
+/**
+ * print_env - Prints the enivornment variables
+ *
+ * This function prints all environemnt variables
+ *
+ * Return: Always return 0.
  */
-int print_env(void)
+void print_env(void)
 {
 	int i = 0;
 	char *str = environ[0];
