@@ -7,49 +7,33 @@
  */
 int main(void)
 {
-	int turn = 0, i = 0;
-	char *line = NULL;
-	char **args = NULL;
+	char *user_input = NULL;
+	size_t input_length = 0;
+	ssize_t input_read = 0;
 
 	while (1)
 	{
-		display_prompt();
-
-		line = read_line();
-		if (!line)
-			break;
-		args = parse_line(line, " \n\t");
-		free(line);
-		if (!args[0])
+		if (isatty(STDIN_FILENO))
 		{
-			for (i = 0; args[i]; i++)
-				free(args[i]);
-			free(args);
-			exit(turn);
+			printf("$ ");
+			fflush(stdout);
 		}
-		else if (strcmp(args[0], "env") == 0)
+		input_read = getline(&user_input, &input_length, stdin);
+		if (input_read == -1)
 		{
-			for (i = 0; args[i]; i++)
-			free(args[i]);
-			free(args);
-			print_env();
+			perror("getline");
+			break;
+		}
+		else if (input_read == 1)
+		{
 			continue;
 		}
-                else if (strcmp(args[0], "exit") == 0 && args[1] == NULL)
-                {
-                        for (i = 0; args[i]; i++)
-                                free(args[i]);
-                        free(args);
-                        exit(turn);
-                }
-                turn = execute_command(args);
-
-                for (i = 0; args[i]; i++)
-                        free(args[i]);
-                free(args);
-        }
-        free (line);
-        if (turn)
-                exit(turn);
-        return (0);
+		if (user_input[input_read - 1] == '\n')
+		{
+			user_input[input_read - 1] = '\0';
+		}
+		token_input(user_input);
+	}
+	free(user_input);
+	return (0);
 }

@@ -1,79 +1,48 @@
 #include "simple_shell.h"
 
 /**
- * execute_command - Executes a command with its arguments
- * @args: an array of arguments (command and its parameters
- * Return: 1 if successful, otherwise -1
+ * execute - Executes a command if it has executable permissions
+ * @argv: Path to the executable file
+ * @user_input: Input provided by the user to the shell
+ * Return: None
  */
-int execute_command(char **args)
+void execute(char *argv[], char *user_input)
 {
-	pid_t pid;
-	struct stat st;
-	int i = 0, status = 0, flag = 0;
-	char *path_full = NULL, **path_arr = NULL, *env_path = NULL;
+	int child_status;
+	int exit_status;
+	pid_t child_pid;
 
-	if (stat(args[0], &st) == 0 && strcmp(args[0], "hbtn_ls") != 0)
+	if (access(argv[0], X_OK) != 0)
 	{
-		path_full = malloc(strlen(args[0]) * sizeof(char *));
-		strcpy(path_full, args[0]);
-		flag = 1;
-		pid = fork();
+		fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+		free(argv[0]);
+		exit(127);
 	}
-	else if (getenv("PATH") && strcmp(getenv("PATH"), "") != 0)
+	child_pid = fork();
+
+	if (child_pid == -1)
 	{
-		env_path = malloc(strlen(getenv("PATH")) * sizeof(char *));
-		strcpy(env_path, getenv("PATH"));
-		path_arr = parse_line(env_path, ":");
-		if (!env_path || !path_arr)
-			perror("malloc");
-		while (path_arr[i])
-		{
-			path_full = malloc((strlen(path_arr[i]) + strlen(args[0]) + 1)
-					* sizeof(char *));
-			strcpy(path_full, path_arr[i]);
-			strcpy(path_full, args[0]);
-			strcat(path_full, "/");
-			if (stat(path_full, &st) == 0)
-			{
-				pid = fork();
-				flag = 1;
-				break;
-			}
-			free(path_full);
-			i++;
-		}
-		for (i = 0; path_arr[i]; i++)
-			free(path_arr[i]);
-		free(env_path);
-		free(path_arr);
+		perror("Failed to fork\n");
+		exit(2);
 	}
-	if (!flag)
+	else if (child_pid == 0)
 	{
-		fprintf(stderr, "./hsh: 1: %s: not found\n", args[0]);
-		return(127);
+		execve(argv[0], argv, environ);
+		free(argv[0]);
+		exit(0);
 	}
 	else
 	{
-		if (pid == -1)
+		wait(&child_status);
+		if (WIFEXITED(child_status))
 		{
-			free(path_full);
-			perror("fork");
-		}
-		else if (pid == 0)
-		{
-			if (execve(path_full, args, environ) == -1)
+			exit_status = WEXITSTATUS(child_status);
+			if (exit_status != 0)
 			{
-				free(path_full);
-				return (2);
+				free(argv[0]);
+				free(user_input);
+				exit(2);
 			}
 		}
-		else
-		{
-			waitpid(pid, &status, 0);
-			free(path_full);
-			if (WIFEXITED(status))
-			       return WEXITSTATUS(status);
-		}
 	}
-       return (0);
 }
