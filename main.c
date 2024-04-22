@@ -19,16 +19,12 @@ int main(void)
 			fflush(stdout);
 		}
 		input_read = getline(&user_input, &input_length, stdin);
-		if (input_read == -1)
+		if (input_read == EOF)
 		{
-			perror("getline");
-			break;
+			free(user_input);
+			exit(0);
 		}
-		else if (input_read == 1)
-		{
-			continue;
-		}
-		if (user_input[input_read - 1] == '\n')
+		if (input_read > 0 && user_input[input_read - 1] == '\n')
 		{
 			user_input[input_read - 1] = '\0';
 		}
