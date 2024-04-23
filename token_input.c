@@ -9,7 +9,7 @@
 void token_input(char *input)
 {
 	char *split = NULL;
-	char *tokens[1024] = { NULL };
+	char *tokens[1024] = {NULL};
 	int index = 0;
 
 	split = strtok(input, " ");
@@ -26,7 +26,7 @@ void token_input(char *input)
 	{
 		return;
 	}
-	if (strcmp(tokens[0], "env") == 0)
+	if (strcmp(tokens[0], "env") == 0 && tokens[1] == NULL)
 	{
 		print_env();
 		return;
@@ -34,6 +34,7 @@ void token_input(char *input)
 	if (strcmp(tokens[0], "exit") == 0 && tokens[1] == NULL)
 	{
 		free(tokens[0]);
+		free(input);
 		exit(0);
 	}
 	split = strdup(tokens[0]);
@@ -47,5 +48,4 @@ void token_input(char *input)
 	}
 	fprintf(stderr, "./hsh: 1: %s: not found\n", split);
 	free(split);
-	exit(127);
 }

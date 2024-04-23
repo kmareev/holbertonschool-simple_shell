@@ -1,1 +1,25 @@
-Insert man page for the function
+Manual Page for Simple Shell
+
+NAME
+	simple_shell - a basic Unix shell implementation
+
+SYNOPSIS
+	simple_shell
+
+DESCRIPTION
+	simple_shell is a simple Unix shell implemented in C programming language.
+	It provides a command-line interface where users can interact with the
+	operating system by executing commands and running programs.
+
+COMMANDS
+	The following commands are supported:
+
+	cd       Change the current directory.
+
+	exit     Exit the shell.
+
+	help     Display help information.
+
+AUTHORS
+	Krisha Valencia
+	Rungruj Thitichirathitikan
