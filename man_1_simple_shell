@@ -11,14 +11,39 @@ DESCRIPTION
 	It provides a command-line interface where users can interact with the
 	operating system by executing commands and running programs.
 
+To run our Simple Shell:
+	./hsh
+	gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh //To compile the code
+
 COMMANDS
-	The following commands are supported:
+        The following commands are supported:
 
-	cd       Change the current directory.
+        cd       Change the current directory.
 
-	exit     Exit the shell.
+        exit     Exit the shell.
 
-	help     Display help information.
+        help     Display help information.
+
+        ls       List directory contents.
+
+        pwd      Print name of current/working directory.
+
+EXAMPLES
+	To run "ls" command in our shell
+
+	in interactive mode:
+
+		$ ./hsh //To run our simple shell
+		($) /bin/ls //The path to run the ls command
+		hsh main.c shell.c //Output
+		($)
+		($) exit //To exit our simple shell
+		$
+	in non-interactive mode:
+
+		$ echo "/bin/ls" | ./hsh //To connect the output of the ls command
+		hsh main.c shell.c test_ls_2 //Output
+		$
 
 AUTHORS
 	Krisha Valencia
