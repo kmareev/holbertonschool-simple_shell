@@ -8,48 +8,47 @@
  */
 char *get_path(char *command)
 {
-	int i = 0;
+	int index = 0;
+	char *entry = NULL;
 	char *token = NULL;
-	char *cache;
 	char *result = NULL;
 
 	if (strchr(command, '/') != NULL)
 		return strdup(command);
 
-	while (environ[i])
+	while (environ[index])
 	{
-		cache = strdup(environ[i]);
-		token = strtok(cache, "=");
-		if (strcmp(token, "PATH") == 0)
+		entry = strdup(environ[index]);
+		token = strtok(entry, "=");
+		if (token && strcmp(token, "PATH") == 0)
 		{
 			token = strtok(NULL, "=");
-			if (strcmp(token, "") == 0)
+			if (token && strcmp(token, "") != 0)
 			{
-				free(cache);
-				return (NULL);
-			}
-			token = strtok(token, ":");
-			while (token)
-			{
-				result = malloc(strlen(token) + strlen(command) + 2);
-				if (result ==  NULL)
+				token = strtok(token, ":");
+
+				while (token)
 				{
-					perror("Malloc is NULL");
-					free(cache);
-					return (NULL);
+					result = malloc(strlen(token) + strlen(command) + 2);
+					if (result == NULL)
+					{
+						perror("Memory allocation failed");
+						free(entry);
+						return (NULL);
+					}
+					sprintf(result, "%s/%s", token, command);
+					if (access(result, X_OK) == 0)
+					{
+						free(entry);
+						return (result);
+					}
+					free(result);
+					token = strtok(NULL, ":");
 				}
-				sprintf(result, "%s/%s", token, command);
-				if (access(result, X_OK) == 0)
-				{
-					free(cache);
-					return (result);
-				}
-				free(result);
-				token = strtok(NULL, ":");
 			}
 		}
-		free(cache);
-		i++;
+		free(entry);
+		index++;
 	}
 	return (NULL);
 }
