@@ -16,6 +16,9 @@ char *get_path(char *command)
 	if (strchr(command, '/') != NULL)
 		return strdup(command);
 
+	if (getenv("PATH") == NULL || strlen(getenv("PATH")) == 0)
+		return (NULL);
+
 	while (environ[index])
 	{
 		entry = strdup(environ[index]);
