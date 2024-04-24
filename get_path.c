@@ -67,7 +67,7 @@ char *get_path(char *command)
 		if (token != NULL && strcmp(token, "PATH") == 0)
 		{
 			token = strtok(NULL, "=");
-			if (token != NULL && strcmp(token) > 0)
+			if (token != NULL && strlen(token) > 0)
 			{
 				token = strtok(token, ":");
 				while (token)
