@@ -13,6 +13,7 @@ char *get_path(char *command)
 	char *cache;
 	char *result = NULL;
 
+	/**
 	if (strchr(command, '/') != NULL)
 		return strdup(command);
 
@@ -50,6 +51,48 @@ char *get_path(char *command)
 		}
 		free(cache);
 		i++;
+	}
+	return (NULL);*/
+
+	if (environ == NULL)
+		return (NULL);
+
+	while (environ[i])
+	{
+		cache = strdup(environ[i]);
+		if (cache == NULL)
+			return (NULL);
+
+		token = strtok(cache, "=");
+		if (token != NULL && strcmp(token, "PATH") == 0)
+		{
+			token = strtok(NULL, "=");
+			if (token != NULL && strcmp(token) > 0)
+			{
+				token = strtok(token, ":");
+				while (token)
+				{
+					result = malloc(strlen(token) + strlen(command) + 2);
+					if (result == NULL)
+					{
+						perror("Malloc is NULL");
+						free(cache);
+						return (NULL);
+					}
+					sprintf(result, "%s/%s", token, command);
+					if (access(result, X_OK) == 0)
+					{
+						free(cache);
+						return (result);
+					}
+					free(result);
+					token = strtok(NULL, ":");
+				}
+			}
+			break;
+		}
+		free(cache);
+        	i++;
 	}
 	return (NULL);
 }
