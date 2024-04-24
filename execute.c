@@ -11,7 +11,6 @@ void execute(char *argv[], char *user_input)
 	int child_status;
 	int exit_status;
 	pid_t child_pid;
-	char *path;
 
 	if (access(argv[0], X_OK) != 0)
 	{
