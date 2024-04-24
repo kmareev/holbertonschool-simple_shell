@@ -15,8 +15,7 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			printf("$ ");
-			fflush(stdout);
+			printf("#cisfun$ ");
 		}
 		input_read = getline(&user_input, &input_length, stdin);
 		if (input_read == EOF)
