@@ -23,6 +23,11 @@ char *get_path(char *command)
 		if (strcmp(token, "PATH") == 0)
 		{
 			token = strtok(NULL, "=");
+			if (strcmp(token, "") == 0)
+			{
+				free(cache);
+				return (NULL);
+			}
 			token = strtok(token, ":");
 			while (token)
 			{
