@@ -6,7 +6,8 @@ Insert project image
 
 
 ## Flowchart
-![Flowchart (1)](https://github.com/kmareev/holbertonschool-simple_shell/assets/158859905/d22ae80c-b06e-4754-8f5c-569829b31035)
+![Flowchart (2)](https://github.com/kmareev/holbertonschool-simple_shell/assets/158859905/7748ffbc-50db-42ff-97e4-1d55caccaebc)
+
 
 
 
