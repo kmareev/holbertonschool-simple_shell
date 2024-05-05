@@ -1,9 +1,12 @@
+![Project banner](https://github.com/kmareev/holbertonschool-simple_shell/assets/158859905/edf52c87-0548-401a-983d-038c377b450d)
 
 
 # C - Simple Shell Project
 
 ## Project Overview
-This Simple Shell project has been developed by a pair of students from Holberton School, Australia. It is a basic implementation of a command-line interpreter, drawing inspiration from the Unix shell. It facilitates the reading of user commands from standard input, their interpretation, and subsequent execution of corresponding actions. This project aims to demonstrate fundamental concepts of system programming, such as process management and file I/O, while providing a simple yet functional shell interface.
+This Simple Shell project has been developed by a pair of students from Holberton School, Australia. It is a basic implementation of a command-line interpreter, drawing inspiration from the Unix shell. It facilitates the reading of user commands from standard input, their interpretation, and subsequent execution of corresponding actions. 
+
+This project aims to demonstrate fundamental concepts of system programming, such as process management and file I/O, while providing a simple yet functional shell interface.
 
 
 ## Flowchart
