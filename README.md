@@ -14,7 +14,6 @@ This project aims to demonstrate fundamental concepts of system programming, suc
 
 
 
-
 ## Requirements
 * Allowed editors: vi, vim, emacs
 * All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
@@ -28,7 +27,7 @@ This project aims to demonstrate fundamental concepts of system programming, suc
 
 ## Usage
 
-### Instalation:
+### Installation:
 To use our simple shell, you can clone this repository:<br>
 
 ```git clone https://github.com/kmareev/holbertonschool-simple-shell.git```
