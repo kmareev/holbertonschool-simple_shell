@@ -1,4 +1,4 @@
-Insert project image
+
 
 # C - Simple Shell Project
 
