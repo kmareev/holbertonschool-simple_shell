@@ -3,6 +3,7 @@ Insert project image
 # C - Simple Shell Project
 
 ## Project Overview
+This Simple Shell project has been developed by a pair of students from Holberton School, Australia. It is a basic implementation of a command-line interpreter, drawing inspiration from the Unix shell. It facilitates the reading of user commands from standard input, their interpretation, and subsequent execution of corresponding actions. This project aims to demonstrate fundamental concepts of system programming, such as process management and file I/O, while providing a simple yet functional shell interface.
 
 
 ## Flowchart
@@ -35,7 +36,7 @@ To run our Simple Shell :<br>
 ```./hsh```
 
 ### For compilation:
-To compile the code using :<br>
+To compile the code:<br>
 
  ```gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh```
 
@@ -66,8 +67,8 @@ hsh main.c shell.c test_ls_2
 $
 ```
 
-## Libraries
 
 ## Contributors
-
+- [Krisha Valencia](https://github.com/kmareev)
+- [Rungruj Thitichirathitikan](https://github.com/LukeRRT)
 
